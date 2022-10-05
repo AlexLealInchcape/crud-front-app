@@ -1,11 +1,9 @@
 
-import React, { useState } from "react";
+import React from "react";
 import Button from "../../atom/Button";
 import style from './searchBar.module.css';
 
-const Search = () => {
-
-    const [search, setSearch] = useState('')
+const Search = ({search, setSearch}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
