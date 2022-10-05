@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Button from "../../atom/Button";
 
 const initialPersonas = [
     {
@@ -56,7 +57,7 @@ const AddUpdate = () => {
                         <input placeholder="speak:STR" defaultValue=''></input>
                         <input placeholder="edad:NUMBER" defaultValue=''></input>
                         <input placeholder="estatura:DOUBLE" defaultValue=''></input>
-                        <button onClick={addUser}>SEND ADD</button>
+                        <Button action={addUser} label='texto' variant="text" />
                     </div>
                     :
                     <div>
