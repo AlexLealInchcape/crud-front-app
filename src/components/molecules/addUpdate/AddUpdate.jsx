@@ -57,7 +57,7 @@ const AddUpdate = () => {
                         <input placeholder="speak:STR" defaultValue=''></input>
                         <input placeholder="edad:NUMBER" defaultValue=''></input>
                         <input placeholder="estatura:DOUBLE" defaultValue=''></input>
-                        <Button action={addUser} label='texto' />
+                        <Button action={addUser} label='texto' variant="text" />
                     </div>
                     :
                     <div>
