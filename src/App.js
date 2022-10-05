@@ -1,4 +1,5 @@
 import './App.css';
+import AddUpdate from './components/molecules/addUpdate/AddUpdate';
 import Search from './components/molecules/SearchBar/SearchBar';
 
 
@@ -7,6 +8,7 @@ function App() {
     <div className="App">
       {/* Componentes aca */}
       <Search />
+      <AddUpdate />
     </div>
   );
 }
