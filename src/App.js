@@ -1,5 +1,5 @@
 import './App.css';
-import Search from './components/Button/SearchBar/SearchBar';
+import Search from './components/molecules/SearchBar/SearchBar';
 
 
 function App() {

@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import Button from "../../atom/Button";
 import style from './searchBar.module.css';
 
 const Search = () => {
@@ -25,9 +26,8 @@ const Search = () => {
         <div>
             <h2 className={style.search}>Search</h2>
             <input className={style.input} value={search} onChange={e => handleChange(e)} placeholder="Search..." />
-            <div className={style.btns}>
-                <button className={style.btn1} type="submit" onClick={handleMostrar}>mostrar todos</button>
-                <button className={style.btn2} type="submit" onClick={handleSubmit}>search</button>
+            <div>
+                <Button handleMostrar={handleMostrar} handleSubmit={handleSubmit}/>
             </div>
         </div>
     )

@@ -1,25 +1,10 @@
-.search {
-    text-transform: uppercase;
-}
-
-.input {
-    border: 2px solid black;
-    border-radius: 4px;
-    padding: 10px;
-    width: 250px;
-    margin-bottom: 10px;
-}
-
 .btn1 {
     margin-right: 54px;
     border: 2px solid black;
     border-radius: 4px;
     padding: 5px 15px;
     font-weight: 900;
-}
-
-.btn1:hover {
-    cursor: pointer;
+    background-color: #fff;
 }
 
 .btn2 {
@@ -27,8 +12,9 @@
     border-radius: 4px;
     padding: 5px 15px;
     font-weight: 900;
+    background-color: #fff;
 }
 
-.btn2:hover {
+.btn1:hover, .btn2:hover {
     cursor: pointer;
 }
