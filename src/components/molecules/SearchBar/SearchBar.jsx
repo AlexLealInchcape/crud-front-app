@@ -9,6 +9,7 @@ const Search = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log('search', search)
     }
 
     const handleChange = (e) => {
@@ -27,7 +28,8 @@ const Search = () => {
             <h2 className={style.search}>Search</h2>
             <input className={style.input} value={search} onChange={e => handleChange(e)} placeholder="Search..." />
             <div>
-                <Button handleMostrar={handleMostrar} handleSubmit={handleSubmit}/>
+                <Button action={handleMostrar} label='Mostrar todos' />
+                <Button action={handleSubmit} label='Search' />
             </div>
         </div>
     )
