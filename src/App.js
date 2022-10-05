@@ -1,14 +1,63 @@
+import { useState } from 'react';
 import './App.css';
 import AddUpdate from './components/molecules/addUpdate/AddUpdate';
 import Search from './components/molecules/SearchBar/SearchBar';
+import UsersList from './components/molecules/UserList/UserList';
 
+const fakeData = [
+  {
+      id: 1,
+      name: "Jaime",
+      speak: "Hi",
+      edad: 24,
+      estatura: 1.83
+  },
+  {
+      id: 2,
+      name: "Rogelio",
+      speak: "Hellow",
+      edad: 30,
+      estatura: 1.90
+  }
+]
 
 function App() {
+  // listado de usuarios que nos da el back
+  const [userList, setUserList] = useState(fakeData)
+  const [search, setSearch] = useState('')
+
+  // estado para manejar los botones de la lista
+  // si queremos editar, borrar o ver el perfil
+  const [modifyUser, setModifyUser] = useState(null)
+
+  // {
+  //   user: los datos del user,
+  //   action: 'edit' || 'remove'
+  // }
+
+  // OPCIONES
+  // useEffect que carge inicialmente los usuarios
+ 
+  const getData = () => {
+    //funcion que llama al back pidiendo los datos
+    // seguramente la llamemos en el useEffect
+  }
+
+  const removeUser = () => {
+    // remove user en el back
+  }
+  
   return (
     <div className="App">
-      {/* Componentes aca */}
-      <Search />
-      <AddUpdate />
+      <Search search={search} setSearch={setSearch} />
+      {/* SACAR ESTO DESPUES */}
+      <br></br>
+      <br></br>
+      <UsersList userList={userList} onUpdate={setModifyUser} />
+      <br></br>
+      <AddUpdate user={modifyUser?.user} />
+
+      {/* Poner aca el profile component */}
     </div>
   );
 }

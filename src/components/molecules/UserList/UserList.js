@@ -1,39 +1,28 @@
-import React, { useState } from "react";
-import styles from "./UsersList.module.css";
-
-const initialList = [
-  {
-    id: 1,
-    firstname: "Juan",
-    speak: "Hello World!",
-    edad: 25,
-    altura: 1.85
-  },
-  {
-    id: 2,
-    firstname: "Alex",
-    speak: "Hello Guys!",
-    edad: 25,
-    altura: 1.75
-  }
-];
+import React from "react";
+import styles from "./UserList.module.css";
 
 // vamos a tener q recibir el listado por props
 // array de objetos [{},{},{}]
-function UsersList() {
-  // temporalmente completo el estado con datos fake
-  const [userList, setUserList] = useState(initialList);
+function UsersList({ userList, onUpdate }) {
 
-  const handleRemove = (id) => {
-    console.log("REMOVE", id);
+  const handleRemove = (u) => {
+    onUpdate({
+      user: u,
+      action: 'remove'
+    })
   };
 
-  const handleEdit = (id) => {
-    console.log("EDIT", id);
+  const handleEdit = (u) => {
+    onUpdate({
+      user: u,
+      action: 'edit'
+    })
   };
 
   const handleView = (id) => {
     console.log("VIEW", id);
+    // redirect a la profile page
+    // la accion termina en esta funcion
   };
 
   return (
@@ -45,19 +34,19 @@ function UsersList() {
             <th>Usuario</th>
             <th colspan="3">Opciones</th>
           </tr>
-          {userList.map(({ id, firstname }) => (
-            <tr key={id}>
+          {userList.map((item) => (
+            <tr key={item.id}>
               <td>
-                <span>{id}</span>
+                <span>{item.id}</span>
               </td>
               <td>
-                <span>{firstname}</span>
+                <span>{item.name}</span>
               </td>
               <td>
                 <button
                   type="button"
                   onClick={() => {
-                    handleEdit(id);
+                    handleEdit(item);
                   }}
                 >
                   Edit
@@ -67,7 +56,7 @@ function UsersList() {
                 <button
                   type="button"
                   onClick={() => {
-                    handleRemove(id);
+                    handleRemove(item);
                   }}
                 >
                   Delete
@@ -77,7 +66,7 @@ function UsersList() {
                 <button
                   type="button"
                   onClick={() => {
-                    handleView(id);
+                    handleView(item.id);
                   }}
                 >
                   View Profile
