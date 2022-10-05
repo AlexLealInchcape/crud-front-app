@@ -3,7 +3,7 @@ import styles from "./UserList.module.css";
 
 // vamos a tener q recibir el listado por props
 // array de objetos [{},{},{}]
-function UsersList({ userList, onUpdate }) {
+function UsersList({ userList, onUpdate, setProfile }) {
 
   const handleRemove = (u) => {
     onUpdate({
@@ -19,15 +19,17 @@ function UsersList({ userList, onUpdate }) {
     })
   };
 
-  const handleView = (id) => {
+  const handleView = (user) => {
+    const {id} = user
     console.log("VIEW", id);
     // redirect a la profile page
+    setProfile(user)
     // la accion termina en esta funcion
   };
 
   return (
     <>
-      <div class={styles.table}>
+      <div className={styles.table}>
         <table>
           <tr>
             <th>#ID</th>
@@ -66,7 +68,7 @@ function UsersList({ userList, onUpdate }) {
                 <button
                   type="button"
                   onClick={() => {
-                    handleView(item.id);
+                    handleView(item);
                   }}
                 >
                   View Profile
