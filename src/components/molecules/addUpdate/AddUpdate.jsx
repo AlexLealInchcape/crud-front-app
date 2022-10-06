@@ -20,7 +20,7 @@ const AddUpdate = ({ user }) => {
                 <input placeholder="speak:STR" defaultValue={user.speak}></input>
                 <input placeholder="edad:NUMBER" defaultValue={user.edad}></input>
                 <input placeholder="estatura:DOUBLE" defaultValue={user.estatura}></input>
-                <Button action={updateUser} label='texto' variant="text" />
+                <Button action={updateUser} label={user ? "Editar" : "Crear"} variant="text" />
                 </>
             ) : (
                 <>
@@ -29,7 +29,7 @@ const AddUpdate = ({ user }) => {
                 <input placeholder="speak:STR" defaultValue=''></input>
                 <input placeholder="edad:NUMBER" defaultValue=''></input>
                 <input placeholder="estatura:DOUBLE" defaultValue=''></input>
-                <Button action={addUser} label='texto' variant="text" />
+                <Button action={addUser} label={!user ? "Crear" : "Editar"} variant="text" />
                 </>
             )}
         </div>
