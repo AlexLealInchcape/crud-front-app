@@ -29,8 +29,8 @@ function UsersList({ userList, onUpdate, setProfile }) {
 
   return (
     <>
-    <div class={styles.padre}>
-      <div class={styles.table}>
+    <div className={styles.padre}>
+      <div className={styles.table}>
 
         <table>
           <thead>

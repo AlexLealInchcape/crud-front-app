@@ -1,128 +1,140 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import Button from "../../atom/Button";
 import styles from "./AddUpdate.module.css";
 
+const initialValues = {
+    name: '',
+    speak: '',
+    edad: 0,
+    estatura: 0
+}
+
 const AddUpdate = ({ user }) => {
-  const addUser = () => {
-    console.log("Add User");
-  };
+    const addUser = () => {
+        console.log("Add User");
+    };
 
-  const updateUser = () => {
-    console.log("Update User");
-  };
+    const [nameUser, setNameUser] = useState(initialValues)
 
-  return (
-    <div class={styles.padre}>
-      {user ? (
-        <>
-          <h1>Editar Usuario</h1>
+    const handleChange = (e) => {
+        e.preventDefault()
+        let type = e.target.name
+        let value = e.target.value
+        const currentValue = nameUser
 
-          <form action={updateUser}>
-            <div class={styles.form}>
-              <div>
-                <label htmlFor="">Nombre:</label>
-                <input placeholder="name:STR" defaultValue={user.name}></input>
-              </div>
-              <div>
-                <label htmlFor="">Speak:</label>
-                <input
-                  placeholder="speak:STR"
-                  defaultValue={user.speak}
-                ></input>
-              </div>
-              <div>
-                <label htmlFor="">Edad:</label>
-                <input
-                  placeholder="edad:NUMBER"
-                  defaultValue={user.edad}
-                ></input>
-              </div>
-              <div>
-                <label htmlFor="">Estatura:</label>
+        if (type === 'edad') {
+            let texto = parseFloat(value)
+            currentValue[type] = texto
+            console.log('edad', typeof texto)
+            return setNameUser(currentValue)
+        }
 
-                <input
-                  placeholder="estatura:DOUBLE"
-                  defaultValue={user.estatura}
-                ></input>
-              </div>
-              <div>
-                <Button action={updateUser} label="texto" variant="text" />
-              </div>
-            </div>
-          </form>
-        </>
-      ) : (
-        <>
-          <h1>Agregar Usuario</h1>
+        if (type === 'estatura') {
+            let texto = parseFloat(value)
+            currentValue[type] = texto
+            console.log('estatura', typeof texto)
+            return setNameUser(currentValue)
+        }
+        currentValue[type] = value
+        setNameUser(currentValue)
+    }
 
-          <form action={addUser}>
-            <div class={styles.form}>
-              <div>
+    const createUser = async () => {
+        axios.post('https://hellowworldapi.azurewebsites.net/Person', nameUser)
+            .then(response => {
+                console.log(response.status)
+                setNameUser(initialValues)
+            })
+            .catch((error) => console.log(error))
+    }
 
-                <label htmlFor="">Nombre:</label>
-                <input placeholder="name:STR" defaultValue=""></input>
-              </div>
-              <div>
-                <label htmlFor="">Speak:</label>
-                <input placeholder="speak:STR" defaultValue=""></input>
-              </div>
-              <div>
-                <label htmlFor="">Edad:</label>
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (!nameUser.name || !nameUser.speak || !nameUser.edad || !nameUser.estatura) {
+            alert('faltan campos')
+        } else {
+            createUser()
+        }
+    }
 
-                <input placeholder="edad:NUMBER" defaultValue=""></input>
-              </div>
-              <div>
-                <label htmlFor="">Estatura:</label>
-                <input placeholder="estatura:DOUBLE" defaultValue=""></input>
-              </div>
-              <div>
-                <Button action={addUser} label="texto" variant="text" />
-              </div>
-            </div>
-          </form>
-        </>
-      )}
-    </div>
-  );
+    const updateUser = () => {
+        console.log('updateUser')
+    }
+
+    return (
+        <div class={styles.padre}>
+            {user ? (
+                <>
+                    <h1>Editar Usuario</h1>
+                    <form action={updateUser}>
+                        <div class={styles.form}>
+                            <div>
+                                <label htmlFor="">Nombre:</label>
+                                <input placeholder="name:STR" defaultValue={user.name}></input>
+                            </div>
+                            <div>
+                                <label htmlFor="">Speak:</label>
+                                <input
+                                    placeholder="speak:STR"
+                                    defaultValue={user.speak}
+                                ></input>
+                            </div>
+                            <div>
+                                <label htmlFor="">Edad:</label>
+                                <input
+                                    placeholder="edad:NUMBER"
+                                    defaultValue={user.edad}
+                                ></input>
+                            </div>
+                            <div>
+                                <label htmlFor="">Estatura:</label>
+
+                                <input
+                                    placeholder="estatura:DOUBLE"
+                                    defaultValue={user.estatura}
+                                ></input>
+                            </div>
+                            <div>
+                                <Button action={updateUser} label={user ? 'Editar' : 'Crear'} variant="text" />
+                            </div>
+                        </div>
+                    </form>
+                </>
+            ) : (
+                <>
+                    <h1>Agregar Usuario</h1>
+
+                    <form action={handleSubmit}>
+                        <div class={styles.form}>
+                            <div>
+
+                                <label htmlFor="">Nombre:</label>
+                                <input placeholder="name:STR" defaultValue="" name='name' onChange={(e) => handleChange(e)}></input>
+                            </div>
+                            <div>
+                                <label htmlFor="">Speak:</label>
+                                <input placeholder="speak:STR" defaultValue="" name='speak' onChange={(e) => handleChange(e)}></input>
+                            </div>
+                            <div>
+                                <label htmlFor="">Edad:</label>
+
+                                <input placeholder="edad:NUMBER" defaultValue="" name='edad' onChange={(e) => handleChange(e)}></input>
+                            </div>
+                            <div>
+                                <label htmlFor="">Estatura:</label>
+                                <input placeholder="estatura:DOUBLE" defaultValue="" name='estatura' onChange={(e) => handleChange(e)}></input>
+                            </div>
+                            <div>
+                                <Button action={handleSubmit} label={!user ? 'Crear' : 'Editar'} variant="text" />
+                            </div>
+                        </div>
+                    </form>
+                </>
+            )}
+        </div>
+    );
 };
 
 
 export default AddUpdate;
-
-// const [personas, setPersonas] = useState(initialPersonas);
-// const [persona, setPersona] = useState({})
-// const [verificar, setVerificar] = useState(false)
-// const { id, name, speak, edad, estatura } = persona
-
-// const verify = (id) => {
-//     const findId = personas.find(item => item.id === id)
-//     if (findId) {
-//         setPersona(findId)
-//         setVerificar(true)
-//     } else {
-//         setVerificar(false)
-//     }
-// }
-
-// useEffect(() => {
-//     verify(6)
-// }, [personas])
-
-// !verificar
-//     ? <div>
-//         <h1>ADD PERSON</h1>
-//         <input placeholder="name:STR" defaultValue=''></input>
-//         <input placeholder="speak:STR" defaultValue=''></input>
-//         <input placeholder="edad:NUMBER" defaultValue=''></input>
-//         <input placeholder="estatura:DOUBLE" defaultValue=''></input>
-//         <Button action={addUser} label='texto' variant="text" />
-//     </div>
-//     :
-//     <div>
-//         <h1>UPDATE PERSON</h1>
-//         <input placeholder="name:STR" defaultValue={name}></input>
-//         <input placeholder="speak:STR" defaultValue={speak}></input>
-//         <input placeholder="edad:NUMBER" defaultValue={edad}></input>
-//         <input placeholder="estatura:DOUBLE" defaultValue={estatura}></input>
-//         <button onClick={updateUser}>SEND UPDATE</button>
-//     </div>
