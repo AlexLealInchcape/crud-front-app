@@ -28,7 +28,7 @@ const AddUpdate = ({ user }) => {
                 <label htmlFor="">Estatura:</label>
                 <input placeholder="estatura:DOUBLE" defaultValue={user.estatura}></input>
 
-                <Button action={updateUser} label='texto' variant="text" />
+                <Button action={updateUser} label={user ? 'Editar' : 'Crear'} variant="text" />
                 </form>
 
                 </>
@@ -45,7 +45,7 @@ const AddUpdate = ({ user }) => {
                 <label htmlFor="">Estura:</label>
                 <input placeholder="estatura:DOUBLE" defaultValue=''></input>
 
-                <Button action={addUser} label='texto' variant="text" />
+                <Button action={addUser} label={!user ? 'crear' : 'Editar'} variant="text" />
                 </form>
 
                 </>
