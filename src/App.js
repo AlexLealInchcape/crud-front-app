@@ -14,12 +14,33 @@ const fakeData = [
       estatura: 1.83
   },
   {
-      id: 2,
-      name: "Rogelio",
-      speak: "Hellow",
-      edad: 30,
-      estatura: 1.90
-  }
+    id: 2,
+    name: "Rogelio",
+    speak: "Hellow",
+    edad: 30,
+    estatura: 1.90
+},
+{
+  id: 3,
+  name: "Rogelio",
+  speak: "Hellow",
+  edad: 30,
+  estatura: 1.90
+},
+{
+  id: 4,
+  name: "Rogelio",
+  speak: "Hellow",
+  edad: 30,
+  estatura: 1.90
+},
+ {
+  id: 5,
+  name: "Rogelio",
+  speak: "Hellow",
+  edad: 30,
+  estatura: 1.90
+}
 ]
 
 function App() {

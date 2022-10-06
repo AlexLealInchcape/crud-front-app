@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../../atom/Button";
+import styles from "./AddUpdate.module.css"
 
 const AddUpdate = ({ user }) => {
 
@@ -12,26 +13,44 @@ const AddUpdate = ({ user }) => {
     }
 
     return (
-        <div>
+        <div class={styles.padre}>
+            <div class={styles.Add}>
             {user ? (
                 <>
-                <h1>EDIT PERSON</h1>
+                <h1>Editar Usuario</h1>
+                <form action={updateUser}>
+                <label htmlFor="">Nombre:</label>
                 <input placeholder="name:STR" defaultValue={user.name}></input>
+                <label htmlFor="">Speak:</label>
                 <input placeholder="speak:STR" defaultValue={user.speak}></input>
+                <label htmlFor="">Edad:</label>
                 <input placeholder="edad:NUMBER" defaultValue={user.edad}></input>
+                <label htmlFor="">Estatura:</label>
                 <input placeholder="estatura:DOUBLE" defaultValue={user.estatura}></input>
-                <Button action={updateUser} label={user ? "Editar" : "Crear"} variant="text" />
+
+                <Button action={updateUser} label='texto' variant="text" />
+                </form>
+
                 </>
             ) : (
                 <>
-                <h1>ADD PERSON</h1>
+                <h1>Agregar Usuario</h1>
+                <form action={addUser}>
+                <label htmlFor="">Nombre:</label>
                 <input placeholder="name:STR" defaultValue=''></input>
+                <label htmlFor="">Speak:</label>
                 <input placeholder="speak:STR" defaultValue=''></input>
+                <label htmlFor="">Edad:</label>
                 <input placeholder="edad:NUMBER" defaultValue=''></input>
+                <label htmlFor="">Estura:</label>
                 <input placeholder="estatura:DOUBLE" defaultValue=''></input>
-                <Button action={addUser} label={!user ? "Crear" : "Editar"} variant="text" />
+
+                <Button action={addUser} label='texto' variant="text" />
+                </form>
+
                 </>
             )}
+        </div>
         </div>
     )
 }

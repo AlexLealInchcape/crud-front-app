@@ -29,7 +29,9 @@ function UsersList({ userList, onUpdate, setProfile }) {
 
   return (
     <>
-      <div className={styles.table}>
+    <div class={styles.padre}>
+      <div class={styles.table}>
+
         <table>
           <thead>
             <tr>
@@ -82,6 +84,7 @@ function UsersList({ userList, onUpdate, setProfile }) {
           </tbody>
         </table>
       </div>
+    </div>
     </>
   );
 }
