@@ -9,11 +9,11 @@ const ProfilePage = ({ user, setProfile }) => {
         <div className={style.wrapper}>
             <div>
                 <div className={style.modal__dialog}>
-                    <h1>Perfil de Usuario</h1>
-                    <h1>Nombre: {user.name}</h1>
-                    <h1>Speak: {user.speak}</h1>
-                    <h1>Edad: {user.edad}</h1>
-                    <h1>Estatura: {user.estatura} mts</h1>
+                    <h2>Perfil de Usuario</h2>
+                    <h3>Nombre:</h3><p> {user.name}</p>
+                    <h3>Speak: </h3><p>{user.speak}</p>
+                    <h3>Edad: </h3><p>{user.edad}</p>
+                    <h3>Estatura: </h3><p>{user.estatura}mts </p>
                     <button onClick={() => setProfile(null)}>Clear/Back</button>
                 </div>
             </div>
