@@ -3,7 +3,7 @@ import styles from "./UserList.module.css";
 
 // vamos a tener q recibir el listado por props
 // array de objetos [{},{},{}]
-function UsersList({ userList, onUpdate }) {
+function UsersList({ userList, onUpdate, setProfile }) {
 
   const handleRemove = (u) => {
     onUpdate({
@@ -19,9 +19,11 @@ function UsersList({ userList, onUpdate }) {
     })
   };
 
-  const handleView = (id) => {
+  const handleView = (user) => {
+    const { id } = user
     console.log("VIEW", id);
     // redirect a la profile page
+    setProfile(user)
     // la accion termina en esta funcion
   };
 
@@ -29,52 +31,57 @@ function UsersList({ userList, onUpdate }) {
     <>
     <div class={styles.padre}>
       <div class={styles.table}>
+
         <table>
-          <tr>
-            <th>#ID</th>
-            <th>Usuario</th>
-            <th colspan="3">Opciones</th>
-          </tr>
-          {userList.map((item) => (
-            <tr key={item.id}>
-              <td>
-                <span>{item.id}</span>
-              </td>
-              <td>
-                <span>{item.name}</span>
-              </td>
-              <td>
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleEdit(item);
-                  }}
-                >
-                  Edit
-                </button>
-              </td>
-              <td>
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleRemove(item);
-                  }}
-                >
-                  Delete
-                </button>
-              </td>
-              <td>
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleView(item.id);
-                  }}
-                >
-                  View Profile
-                </button>
-              </td>
+          <thead>
+            <tr>
+              <th>#ID</th>
+              <th>Usuario</th>
+              <th colSpan="3">Opciones</th>
             </tr>
-          ))}
+          </thead>
+          <tbody>
+            {userList.map((item) => (
+              <tr key={item.id}>
+                <td>
+                  <span>{item.id}</span>
+                </td>
+                <td>
+                  <span>{item.name}</span>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleEdit(item);
+                    }}
+                  >
+                    Edit
+                  </button>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleRemove(item);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleView(item);
+                    }}
+                  >
+                    View Profile
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>

@@ -27,8 +27,10 @@ const AddUpdate = ({ user }) => {
                 <input placeholder="edad:NUMBER" defaultValue={user.edad}></input>
                 <label htmlFor="">Estatura:</label>
                 <input placeholder="estatura:DOUBLE" defaultValue={user.estatura}></input>
+
                 <Button action={updateUser} label='texto' variant="text" />
                 </form>
+
                 </>
             ) : (
                 <>
@@ -42,8 +44,10 @@ const AddUpdate = ({ user }) => {
                 <input placeholder="edad:NUMBER" defaultValue=''></input>
                 <label htmlFor="">Estura:</label>
                 <input placeholder="estatura:DOUBLE" defaultValue=''></input>
+
                 <Button action={addUser} label='texto' variant="text" />
                 </form>
+
                 </>
             )}
         </div>
