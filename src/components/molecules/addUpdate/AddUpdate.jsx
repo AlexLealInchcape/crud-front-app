@@ -39,6 +39,7 @@ const AddUpdate = ({ user }) => {
               </div>
               <div>
                 <label htmlFor="">Estatura:</label>
+
                 <input
                   placeholder="estatura:DOUBLE"
                   defaultValue={user.estatura}
@@ -57,6 +58,7 @@ const AddUpdate = ({ user }) => {
           <form action={addUser}>
             <div class={styles.form}>
               <div>
+
                 <label htmlFor="">Nombre:</label>
                 <input placeholder="name:STR" defaultValue=""></input>
               </div>
@@ -66,6 +68,7 @@ const AddUpdate = ({ user }) => {
               </div>
               <div>
                 <label htmlFor="">Edad:</label>
+
                 <input placeholder="edad:NUMBER" defaultValue=""></input>
               </div>
               <div>
@@ -82,6 +85,7 @@ const AddUpdate = ({ user }) => {
     </div>
   );
 };
+
 
 export default AddUpdate;
 
