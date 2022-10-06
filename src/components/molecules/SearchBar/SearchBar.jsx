@@ -22,10 +22,10 @@ const Search = ({search, setSearch}) => {
     }
 
     return (
-        <div class={style.padre}>
-        <div class={style.search}>
+        <div className={style.padre}>
+        <div className={style.search}>
             <h2 >C.R.U.D</h2>
-            <input class={style.input} value={search} onChange={e => handleChange(e)} placeholder="Search..." />
+            <input className={style.input} value={search} onChange={e => handleChange(e)} placeholder="Search..." />
                 <Button action={handleSubmit} label='Buscar' />
                 <Button action={handleMostrar} label='Mostrar todos' />
                 

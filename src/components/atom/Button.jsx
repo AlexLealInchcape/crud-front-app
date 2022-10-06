@@ -6,12 +6,12 @@ const Button = ({ action, label, variant }) => {
     return (
         <div>
             <button className={
-              clsx({
-                [styles.button]: true,
-                [styles.text]: variant === 'text',
-                [styles.filled]: variant === 'filled',
-                [styles.outlined]: variant === 'outlined'
-               }) 
+                clsx({
+                    [styles.button]: true,
+                    [styles.text]: variant === 'text',
+                    [styles.filled]: variant === 'filled',
+                    [styles.outlined]: variant === 'outlined'
+                })
             } type="submit" onClick={action}>{label}</button>
         </div>
     )
