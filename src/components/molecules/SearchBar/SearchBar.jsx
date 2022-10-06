@@ -22,13 +22,14 @@ const Search = ({search, setSearch}) => {
     }
 
     return (
-        <div>
-            <h2 className={style.search}>Search</h2>
-            <input className={style.input} value={search} onChange={e => handleChange(e)} placeholder="Search..." />
-            <div>
+        <div class={style.padre}>
+        <div class={style.search}>
+            <h2 >C.R.U.D</h2>
+            <input class={style.input} value={search} onChange={e => handleChange(e)} placeholder="Search..." />
+                <Button action={handleSubmit} label='Buscar' />
                 <Button action={handleMostrar} label='Mostrar todos' />
-                <Button action={handleSubmit} label='Search' />
-            </div>
+                
+        </div>
         </div>
     )
 }

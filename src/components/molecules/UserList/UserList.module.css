@@ -2,22 +2,28 @@
 	border-radius: 5px;
 	margin: 0px;
 	padding: 0px;
+          
 }
 .table table {
-	justify-content: space-between;
 	border: 2px solid black;
-	width: 100%;
 	flex-wrap: wrap;
+    width: 100%;
 }
 .table th {
 	border: 2px solid gray;
 	background-image: linear-gradient(gray, white, gray);
 }
 .table button {
-	width: 80%;
+	width: 85%;
 }
 
 .table {
 	border: 2px solid gray;
 	text-align: center;
+    width: 90%;
+   
+   }
+.padre{
+    justify-content: center;
+    display: flex;
 }

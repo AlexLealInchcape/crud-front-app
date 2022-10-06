@@ -27,6 +27,7 @@ function UsersList({ userList, onUpdate }) {
 
   return (
     <>
+    <div class={styles.padre}>
       <div class={styles.table}>
         <table>
           <tr>
@@ -76,6 +77,7 @@ function UsersList({ userList, onUpdate }) {
           ))}
         </table>
       </div>
+    </div>
     </>
   );
 }
