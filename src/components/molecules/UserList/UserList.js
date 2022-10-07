@@ -1,13 +1,15 @@
 import React from "react";
+import Button from "../../atom/Button";
 import styles from "./UserList.module.css";
 
 
 // vamos a tener q recibir el listado por props
 // array de objetos [{},{},{}]
-function UsersList({ userList, onUpdate, setProfile, onDelete }) {
+function UsersList({ userList, onUpdate, setProfile, onDelete, setShowAddUpdate }) {
 
   
   const handleEdit = (u) => {
+    setShowAddUpdate(true)
     onUpdate({
       user: u,
       action: 'edit'
@@ -45,34 +47,31 @@ function UsersList({ userList, onUpdate, setProfile, onDelete }) {
                   <span>{item.name}</span>
                 </td>
                 <td>
-                  <button
-                    type="button"
-                    onClick={() => {
+                  <Button
+                    variant='text'
+                    label='Edit'
+                    action={() => {
                       handleEdit(item);
                     }}
-                  >
-                    Edit
-                  </button>
+                  />
                 </td>
                 <td>
-                  <button
-                    type="button"
-                    onClick={() => {
+                  <Button
+                    variant='text'
+                    label='Delete'
+                    action={() => {
                       onDelete(item.id);
                     }}
-                  >
-                    Delete
-                  </button>
+                  />
                 </td>
                 <td>
-                  <button
-                    type="button"
-                    onClick={() => {
+                  <Button
+                    variant='text'
+                    label='View Profile'
+                    action={() => {
                       handleView(item);
                     }}
-                  >
-                    View Profile
-                  </button>
+                  />
                 </td>
               </tr>
             ))}
