@@ -5,6 +5,7 @@ import ProfilePage from './components/molecules/profilePage/ProfilePage';
 import Search from './components/molecules/SearchBar/SearchBar';
 import UsersList from './components/molecules/UserList/UserList';
 import './App.css';
+import { renderIntoDocument } from 'react-dom/test-utils';
 
 // const fakeData = [
 //   {
@@ -90,9 +91,24 @@ useEffect(() => {
     }
     console.log("Eliminado",response)
 
+    
+
   }
   
-  
+  const updateUser = async (updatedUser) => {
+    const id = updatedUser.id
+    const response = await axios.put(`https://hellowworldapi.azurewebsites.net/Person/${id}`, updatedUser)
+    //getUsers()
+    if(response.status === 200){
+      const filterid = userList.map(item => {
+        if (item.id === updatedUser.id) return updatedUser
+        return item
+      })
+      setUserList(filterid)
+    }
+    // console.log("Actualizado",response)
+  }
+
 
 
   return (
@@ -103,7 +119,7 @@ useEffect(() => {
       <br></br>
       <UsersList userList={userList} onUpdate={setModifyUser} setProfile={setProfile} onDelete={removeUser} />
       <br></br>
-      <AddUpdate user={modifyUser?.user} onUserAdded={onUserAdded}/>
+      <AddUpdate user={modifyUser?.user} onUserAdded={onUserAdded} onUserUpdated={updateUser}/>
 
       {/* Poner aca el profile component */}
       <ProfilePage user={profile} setProfile={setProfile}/>

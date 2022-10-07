@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "../../atom/Button";
 import styles from "./AddUpdate.module.css";
@@ -10,12 +10,12 @@ const initialValues = {
     estatura: 0
 }
 
-const AddUpdate = ({ user, onUserAdded }) => {
-    const addUser = () => {
-        console.log("Add User");
-    };
-
+const AddUpdate = ({ user, onUserAdded, onUserUpdated }) => {
     const [nameUser, setNameUser] = useState(initialValues)
+
+    useEffect(( )=>{
+        setNameUser(user)
+    },[user])
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -55,8 +55,11 @@ const AddUpdate = ({ user, onUserAdded }) => {
         }
     }
 
-    const updateUser = () => {
+    const updateUser = (e) => {
+        e.preventDefault()
         console.log('updateUser')
+        console.log('nameUser',nameUser)
+        onUserUpdated(nameUser)
     }
 
     return (
@@ -68,20 +71,20 @@ const AddUpdate = ({ user, onUserAdded }) => {
                         <div class={styles.form}>
                             <div>
                                 <label htmlFor="">Nombre:</label>
-                                <input placeholder="name:STR" defaultValue={user.name}></input>
+                                <input placeholder="name:STR" defaultValue={user.name} name='name' onChange={(e) => handleChange(e)}></input>
                             </div>
                             <div>
                                 <label htmlFor="">Speak:</label>
                                 <input
                                     placeholder="speak:STR"
-                                    defaultValue={user.speak}
+                                    defaultValue={user.speak} name='speak' onChange={(e) => handleChange(e)}
                                 ></input>
                             </div>
                             <div>
                                 <label htmlFor="">Edad:</label>
                                 <input
                                     placeholder="edad:NUMBER"
-                                    defaultValue={user.edad}
+                                    defaultValue={user.edad} name='edad' onChange={(e) => handleChange(e)}
                                 ></input>
                             </div>
                             <div>
@@ -89,7 +92,7 @@ const AddUpdate = ({ user, onUserAdded }) => {
 
                                 <input
                                     placeholder="estatura:DOUBLE"
-                                    defaultValue={user.estatura}
+                                    defaultValue={user.estatura} name='estatura' onChange={(e) => handleChange(e)}
                                 ></input>
                             </div>
                             <div>
