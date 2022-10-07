@@ -1,17 +1,12 @@
 import React from "react";
 import styles from "./UserList.module.css";
 
+
 // vamos a tener q recibir el listado por props
 // array de objetos [{},{},{}]
-function UsersList({ userList, onUpdate, setProfile }) {
+function UsersList({ userList, onUpdate, setProfile, onDelete }) {
 
-  const handleRemove = (u) => {
-    onUpdate({
-      user: u,
-      action: 'remove'
-    })
-  };
-
+  
   const handleEdit = (u) => {
     onUpdate({
       user: u,
@@ -63,7 +58,7 @@ function UsersList({ userList, onUpdate, setProfile }) {
                   <button
                     type="button"
                     onClick={() => {
-                      handleRemove(item);
+                      onDelete(item.id);
                     }}
                   >
                     Delete
