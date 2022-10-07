@@ -16,7 +16,7 @@ function App() {
   // estado para manejar los botones de la lista
   // si queremos editar, borrar o ver el perfil
   const [modifyUser, setModifyUser] = useState(null)
-
+  const [showAddUpdate, setShowAddUpdate] =useState(false)
   const onUserAdded = (newUser) => {
     setUserList([...userList, newUser])
   }
@@ -84,14 +84,15 @@ useEffect(() => {
 
   return (
     <div className="App">
-      <Search search={search} setSearch={setSearch} />
+      <Search search={search} setSearch={setSearch} setShowAddUpdate={setShowAddUpdate} />
       {/* SACAR ESTO DESPUES */}
       <br></br>
       <br></br>
       <UsersList userList={filtered.length > 0 ? filtered : userList} onUpdate={setModifyUser} setProfile={setProfile} onDelete={removeUser} />
-      <br></br>
-      <AddUpdate user={modifyUser?.user} onUserAdded={onUserAdded} onUserUpdated={updateUser}/>
-
+      <br></br> {
+        showAddUpdate ? <AddUpdate user={modifyUser?.user} onUserAdded={onUserAdded} onUserUpdated={updateUser}/>:null
+      }
+      
       {/* Poner aca el profile component */}
       <ProfilePage user={profile} setProfile={setProfile}/>
     </div>
