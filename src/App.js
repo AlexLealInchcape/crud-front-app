@@ -5,49 +5,11 @@ import ProfilePage from './components/molecules/profilePage/ProfilePage';
 import Search from './components/molecules/SearchBar/SearchBar';
 import UsersList from './components/molecules/UserList/UserList';
 import './App.css';
-import { renderIntoDocument } from 'react-dom/test-utils';
-
-// const fakeData = [
-//   {
-//       id: 1,
-//       name: "Jaime",
-//       speak: "Hi",
-//       edad: 24,
-//       estatura: 1.83
-//   },
-//   {
-//     id: 2,
-//     name: "Rogelio",
-//     speak: "Hellow",
-//     edad: 30,
-//     estatura: 1.90
-// },
-// {
-//   id: 3,
-//   name: "Rogelio",
-//   speak: "Hellow",
-//   edad: 30,
-//   estatura: 1.90
-// },
-// {
-//   id: 4,
-//   name: "Rogelio",
-//   speak: "Hellow",
-//   edad: 30,
-//   estatura: 1.90
-// },
-//  {
-//   id: 5,
-//   name: "Rogelio",
-//   speak: "Hellow",
-//   edad: 30,
-//   estatura: 1.90
-// }
-// ]
 
 function App() {
   // listado de usuarios que nos da el back
   const [userList, setUserList] = useState([])
+  const [filtered, setFiltered] = useState([])
   const [search, setSearch] = useState('')
   const [profile, setProfile] = useState(null)
 
@@ -66,6 +28,20 @@ function App() {
 }
 
 useEffect(() => {
+  const numberRegex = /[0-9]/.test(search);
+  if(numberRegex) {
+    const number = parseInt(search)
+    const filtradoId = userList.filter(item => item.id === number)
+    return setFiltered(filtradoId)
+  }
+
+  if(typeof search === 'string') {
+    const filtrado = userList.filter(item => item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+    return setFiltered(filtrado)
+  }
+}, [search])
+
+useEffect(() => {
   getUsers()
 }, [])
   
@@ -82,17 +58,13 @@ useEffect(() => {
     // seguramente la llamemos en el useEffect
   }
 
-   
+  
     const removeUser = async (id) => {
     const response = await axios.delete(`https://hellowworldapi.azurewebsites.net/Person/${id}`)
     if(response.status === 200){
       const filterid = userList.filter(item => item.id !== id)
       setUserList(filterid)
     }
-    console.log("Eliminado",response)
-
-    
-
   }
   
   const updateUser = async (updatedUser) => {
@@ -106,7 +78,6 @@ useEffect(() => {
       })
       setUserList(filterid)
     }
-    // console.log("Actualizado",response)
   }
 
 
@@ -117,7 +88,7 @@ useEffect(() => {
       {/* SACAR ESTO DESPUES */}
       <br></br>
       <br></br>
-      <UsersList userList={userList} onUpdate={setModifyUser} setProfile={setProfile} onDelete={removeUser} />
+      <UsersList userList={filtered.length > 0 ? filtered : userList} onUpdate={setModifyUser} setProfile={setProfile} onDelete={removeUser} />
       <br></br>
       <AddUpdate user={modifyUser?.user} onUserAdded={onUserAdded} onUserUpdated={updateUser}/>
 
