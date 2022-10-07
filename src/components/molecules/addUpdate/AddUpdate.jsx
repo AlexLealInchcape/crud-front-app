@@ -10,7 +10,7 @@ const initialValues = {
     estatura: 0
 }
 
-const AddUpdate = ({ user }) => {
+const AddUpdate = ({ user, onUserAdded }) => {
     const addUser = () => {
         console.log("Add User");
     };
@@ -41,12 +41,9 @@ const AddUpdate = ({ user }) => {
     }
 
     const createUser = async () => {
-        axios.post('https://hellowworldapi.azurewebsites.net/Person', nameUser)
-            .then(response => {
-                console.log(response.status)
-                setNameUser(initialValues)
-            })
-            .catch((error) => console.log(error))
+        const response = await axios.post('https://hellowworldapi.azurewebsites.net/Person', nameUser)
+        const data = response.data.data
+        onUserAdded(data)
     }
 
     const handleSubmit = (e) => {
