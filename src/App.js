@@ -16,7 +16,7 @@ function App() {
   // estado para manejar los botones de la lista
   // si queremos editar, borrar o ver el perfil
   const [modifyUser, setModifyUser] = useState(null)
-  const [showAddUpdate, setShowAddUpdate] =useState(false)
+  const [showAddUpdate, setShowAddUpdate] = useState(false)
   const onUserAdded = (newUser) => {
     setUserList([...userList, newUser])
   }
@@ -25,26 +25,26 @@ function App() {
     const response = await axios('https://hellowworldapi.azurewebsites.net/Person')
     const data = response.data
     setUserList(data)
-}
-
-useEffect(() => {
-  const numberRegex = /[0-9]/.test(search);
-  if(numberRegex) {
-    const number = parseInt(search)
-    const filtradoId = userList.filter(item => item.id === number)
-    return setFiltered(filtradoId)
   }
 
-  if(typeof search === 'string') {
-    const filtrado = userList.filter(item => item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
-    return setFiltered(filtrado)
-  }
-}, [search])
+  useEffect(() => {
+    const numberRegex = /[0-9]/.test(search);
+    if (numberRegex) {
+      const number = parseInt(search)
+      const filtradoId = userList.filter(item => item.id === number)
+      return setFiltered(filtradoId)
+    }
 
-useEffect(() => {
-  getUsers()
-}, [])
-  
+    if (typeof search === 'string') {
+      const filtrado = userList.filter(item => item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+      return setFiltered(filtrado)
+    }
+  }, [search])
+
+  useEffect(() => {
+    getUsers()
+  }, [])
+
   // {
   //   user: los datos del user,
   //   action: 'edit' || 'remove'
@@ -58,29 +58,28 @@ useEffect(() => {
     // seguramente la llamemos en el useEffect
   }
 
-  
-    const removeUser = async (id) => {
+
+  const removeUser = async (id) => {
     const response = await axios.delete(`https://hellowworldapi.azurewebsites.net/Person/${id}`)
-    if(response.status === 200){
+    if (response.status === 200) {
       const filterid = userList.filter(item => item.id !== id)
       setUserList(filterid)
     }
   }
-  
+
   const updateUser = async (updatedUser) => {
     const id = updatedUser.id
     const response = await axios.put(`https://hellowworldapi.azurewebsites.net/Person/${id}`, updatedUser)
     //getUsers()
-    if(response.status === 200){
+    if (response.status === 200) {
       const filterid = userList.map(item => {
         if (item.id === updatedUser.id) return updatedUser
         return item
       })
       setUserList(filterid)
+      setShowAddUpdate(false)
     }
   }
-
-
 
   return (
     <div className="App">
@@ -88,13 +87,14 @@ useEffect(() => {
       {/* SACAR ESTO DESPUES */}
       <br></br>
       <br></br>
-      <UsersList userList={filtered.length > 0 ? filtered : userList} onUpdate={setModifyUser} setProfile={setProfile} onDelete={removeUser} />
-      <br></br> {
-        showAddUpdate ? <AddUpdate user={modifyUser?.user} onUserAdded={onUserAdded} onUserUpdated={updateUser}/>:null
+      <UsersList userList={filtered.length > 0 ? filtered : userList} onUpdate={setModifyUser} setProfile={setProfile} onDelete={removeUser} setShowAddUpdate={setShowAddUpdate} />
+      <br></br>
+      {
+        showAddUpdate ? <AddUpdate user={modifyUser?.user} onUserAdded={onUserAdded} onUserUpdated={updateUser} setShowAddUpdate={setShowAddUpdate} /> : null
       }
-      
+
       {/* Poner aca el profile component */}
-      <ProfilePage user={profile} setProfile={setProfile}/>
+      <ProfilePage user={profile} setProfile={setProfile} />
     </div>
   );
 }

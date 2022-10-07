@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import axios from "axios";
 import Button from "../../atom/Button";
 import styles from "./AddUpdate.module.css";
@@ -10,11 +10,13 @@ const initialValues = {
     estatura: 0
 }
 
-const AddUpdate = ({ user, onUserAdded, onUserUpdated }) => {
+const AddUpdate = ({ user, onUserAdded, onUserUpdated, setShowAddUpdate }) => {
     const [nameUser, setNameUser] = useState(initialValues)
 
     useEffect(( )=>{
-        setNameUser(user)
+        if(user) {
+            setNameUser(user)
+        }
     },[user])
 
     const handleChange = (e) => {
@@ -41,7 +43,9 @@ const AddUpdate = ({ user, onUserAdded, onUserUpdated }) => {
     }
 
     const createUser = async () => {
-        const response = await axios.post('https://hellowworldapi.azurewebsites.net/Person', nameUser)
+        const datos = nameUser
+        setNameUser(initialValues)
+        const response = await axios.post('https://hellowworldapi.azurewebsites.net/Person', datos)
         const data = response.data.data
         onUserAdded(data)
     }
@@ -59,7 +63,12 @@ const AddUpdate = ({ user, onUserAdded, onUserUpdated }) => {
         e.preventDefault()
         console.log('updateUser')
         console.log('nameUser',nameUser)
-        onUserUpdated(nameUser)
+        const data = nameUser
+        onUserUpdated(data)
+    }
+
+    const closeAddComponent = () => {
+        setShowAddUpdate(false)
     }
 
     return (
@@ -71,32 +80,29 @@ const AddUpdate = ({ user, onUserAdded, onUserUpdated }) => {
                         <div class={styles.form}>
                             <div>
                                 <label htmlFor="">Nombre:</label>
-                                <input placeholder="name:STR" defaultValue={user.name} name='name' onChange={(e) => handleChange(e)}></input>
+                                <input placeholder={user.name} name='name' onChange={(e) => handleChange(e)}></input>
                             </div>
                             <div>
                                 <label htmlFor="">Speak:</label>
                                 <input
-                                    placeholder="speak:STR"
-                                    defaultValue={user.speak} name='speak' onChange={(e) => handleChange(e)}
+                                    placeholder={user.speak} name='speak' onChange={(e) => handleChange(e)}
                                 ></input>
                             </div>
                             <div>
                                 <label htmlFor="">Edad:</label>
                                 <input
-                                    placeholder="edad:NUMBER"
-                                    defaultValue={user.edad} name='edad' onChange={(e) => handleChange(e)}
+                                    placeholder={user.edad} name='edad' onChange={(e) => handleChange(e)}
                                 ></input>
                             </div>
                             <div>
                                 <label htmlFor="">Estatura:</label>
-
                                 <input
-                                    placeholder="estatura:DOUBLE"
-                                    defaultValue={user.estatura} name='estatura' onChange={(e) => handleChange(e)}
+                                    placeholder={user.estatura} name='estatura' onChange={(e) => handleChange(e)}
                                 ></input>
                             </div>
                             <div>
-                                <Button action={updateUser} label={user ? 'Editar' : 'Crear'} variant="text" />
+                                <Button  action={closeAddComponent} label='Cancelar' variant='text'/>
+                                <Button action={updateUser} label={user ? 'Editar' : 'Crear'} />
                             </div>
                         </div>
                     </form>
