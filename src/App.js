@@ -67,7 +67,7 @@ function App() {
 useEffect(() => {
   getUsers()
 }, [])
-
+  
   // {
   //   user: los datos del user,
   //   action: 'edit' || 'remove'
@@ -81,17 +81,27 @@ useEffect(() => {
     // seguramente la llamemos en el useEffect
   }
 
-  const removeUser = () => {
-    // remove user en el back
+   
+    const removeUser = async (id) => {
+    const response = await axios.delete(`https://hellowworldapi.azurewebsites.net/Person/${id}`)
+    if(response.status === 200){
+      const filterid = userList.filter(item => item.id !== id)
+      setUserList(filterid)
+    }
+    console.log("Eliminado",response)
+
   }
   
+  
+
+
   return (
     <div className="App">
       <Search search={search} setSearch={setSearch} />
       {/* SACAR ESTO DESPUES */}
       <br></br>
       <br></br>
-      <UsersList userList={userList} onUpdate={setModifyUser} setProfile={setProfile}/>
+      <UsersList userList={userList} onUpdate={setModifyUser} setProfile={setProfile} onDelete={removeUser} />
       <br></br>
       <AddUpdate user={modifyUser?.user} onUserAdded={onUserAdded}/>
 
