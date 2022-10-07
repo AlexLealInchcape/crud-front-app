@@ -3,7 +3,7 @@ import React from "react";
 import Button from "../../atom/Button";
 import style from './searchBar.module.css';
 
-const Search = ({search, setSearch}) => {
+const Search = ({ search, setSearch }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -12,8 +12,6 @@ const Search = ({search, setSearch}) => {
 
     const handleChange = (e) => {
         e.preventDefault()
-        let consolex = e.target.value
-        console.log("🚀 ~ console ->", consolex)
         setSearch(e.target.value)
     }
 
@@ -23,13 +21,12 @@ const Search = ({search, setSearch}) => {
 
     return (
         <div className={style.padre}>
-        <div className={style.search}>
-            <h2 >C.R.U.D</h2>
-            <input className={style.input} value={search} onChange={e => handleChange(e)} placeholder="Search..." />
+            <div className={style.search}>
+                <h2>C.R.U.D</h2>
+                <input className={style.input} value={search} onChange={e => handleChange(e)} placeholder="Search..." />
                 <Button action={handleSubmit} label='Buscar' />
                 <Button action={handleMostrar} label='Mostrar todos' />
-                
-        </div>
+            </div>
         </div>
     )
 }
