@@ -41,7 +41,7 @@ function UsersList({ userList, onUpdate, setProfile }) {
             </tr>
           </thead>
           <tbody>
-            {userList.map((item) => (
+            {userList?.map((item) => (
               <tr key={item.id}>
                 <td>
                   <span>{item.id}</span>
